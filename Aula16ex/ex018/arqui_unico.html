@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercício 17</title>
+    <title>Exercício 18</title>
     <style>
         body {
             background: rgb(70, 130, 241);
@@ -24,6 +24,10 @@
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.507);
         }
         
+        select#flista {
+            width: 150px;
+        }
+        
         footer {
             color: white;
             text-align: center;
@@ -33,11 +37,15 @@
 </head>
 <body>
     <header>
-        <h1>Tabuada</h1>
+        <h1>Analisador de Números</h1>
     </header>
     <section>
         <div>
-            <p>Número: <input type="number" id="txtn"> <input type="button" value="Contar tabuada" onclick="tabuada()"></p>
+            Número (entre 1 e 100):
+            <input type="number" id="fnum">
+            <input type="button" value="Adicionar" onclick="adicionar()">
+            <br><br><select name="flista" id="flista" size="6"></select>
+            <br><input type="button" value="Finalizar" onclick="finalizar()">
         </div>
         <div id="res">
             
@@ -47,21 +55,67 @@
         <p>&copy; Sirso</p>
     </footer>
     <script>
-        function tabuada() {
-            var num = parseInt(document.getElementById('txtn').value)
-            var res = document.getElementById('res')
-        
-            if (!isNaN(num)) {
-                res.innerHTML = '' // Limpar o conteúdo atual
-                for (var count = 1; count <= 10; count += 1) {
-                        res.innerHTML += `${num} x ${count} = ${num * count} <br>`
-                }
-                res.style.color = 'black'
-            } else {
-                res.innerHTML = 'Erro! Insira um número válido! <br>'
-                res.style.color = 'red'
-            }
+        let num = document.querySelector('input#fnum')
+let lista = document.querySelector('select#flista')
+let res = document.querySelector('div#res')
+let valores = []
+
+function isNumero(n) {
+    if(Number(n) >= 1 && Number(n) <= 100) {
+        return true
+    } else {
+        return false
+    }
+}
+
+function inLista(n, l) {
+    if (l.indexOf(Number(n)) != -1) {
+        return true
+    } else {
+        return false
+    }
+}
+
+function adicionar() {
+    if (isNumero(num.value) && !inLista(num.value, valores)) {
+        valores.push(Number(num.value))
+        let item = document.createElement('option')
+        item.text = `Valor ${num.value} adicionado.`
+        lista.appendChild(item)
+        res.innerHTML = '' //apaga o resultado "Ao todo, temos ?? números cadstrados", caso novos números seja adicionados.
+    } else {
+        window.alert('Valor inválido ou repetido!')
+    }
+    num.value = '' // apaga número no campo Número (entre 1 a 100), após ser adicionado 
+    num.focus() // faz com que o cursor pisque no campo Número (entre 1 a 100).
+}
+
+function finalizar() {
+    if (valores.length == 0) {
+        window.alert('Adcione valores antes de finalizar!')
+    } else {
+        let total = valores.length
+        let maior = valores[0]
+        let menor = valores[0]
+        let soma = 0
+        let média = 0
+        for(let posição in valores) {
+            soma += valores[posição]
+            média = soma / total //Ou valores.length
+            if (valores[posição] > maior)
+                maior = valores[posição]
+            if (valores[posição] < menor)
+                menor = valores[posição]
         }
+        res.innerHTML = ''
+        res.innerHTML += `<p>Ao todo, temos ${total} números cadastrados.</p>`
+        res.innerHTML += `<p>O maior valor informado foi ${maior}.</p>`
+        res.innerHTML += `<p>O menor valor informado foi ${menor}.</p>`
+        res.innerHTML += `<p>A soma dos valores é ${soma}.</p>`
+        res.innerHTML += `<p>A média dos valores é ${média}.</p>`
+    
+    }
+}
     </script>
 </body>
 </html>
