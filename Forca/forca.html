@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Forca</title>
+</head>
+<body>
+    <h1>Jogo da Forca</h1>
+    <div id="forca">
+        <p id="palavra"></p>
+        <p id="tentativas-restantes"></p>
+        <input type="text" id="palpite" placeholder="Digite uma letra">
+        <button onclick="adivinhar()">Adivinhar</button>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        const palavras = ["PYTHON", "JAVA", "JAVASCRIPT", "HTML", "CSS"];
+        let palavraEscolhida = palavras[Math.floor(Math.random() * palavras.length)];
+        let letrasCorretas = new Set();
+        let tentativasRestantes = 7;
+
+        function exibirPalavra() {
+            let palavraExibida = '';
+            for (let letra of palavraEscolhida) {
+                if (letrasCorretas.has(letra)) {
+                    palavraExibida += letra;
+                } else {
+                    palavraExibida += '_';
+                }
+            }
+            document.getElementById('palavra').textContent = palavraExibida;
+        }
+
+        function adivinhar() {
+            let palpite = document.getElementById('palpite').value.toUpperCase();
+            document.getElementById('palpite').value = '';
+
+            if (palavraEscolhida.includes(palpite)) {
+                letrasCorretas.add(palpite);
+            } else {
+                tentativasRestantes--;
+            }
+
+            exibirPalavra();
+            document.getElementById('tentativas-restantes').textContent = `Tentativas restantes: ${tentativasRestantes}`;
+
+            if (tentativasRestantes === 0) {
+                document.getElementById('resultado').textContent = `Você perdeu! A palavra era "${palavraEscolhida}".`;
+                document.getElementById('palavra').style.color = 'red';
+            } else if (!document.getElementById('palavra').textContent.includes('_')) {
+                document.getElementById('resultado').textContent = 'Parabéns! Você ganhou!';
+                document.getElementById('palavra').style.color = 'green';
+            }
+        }
+
+        exibirPalavra();
+        document.getElementById('tentativas-restantes').textContent = `Tentativas restantes: ${tentativasRestantes}`;
+    </script>
+</body>
+</html>

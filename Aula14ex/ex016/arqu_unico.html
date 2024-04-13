@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo de exercício</title>
+    <style>
+        body {
+            background: rgb(70, 130, 241);
+            font: normal 15pt Arial;
+        }
+        
+        header {
+            color: white;
+            text-align: center;
+        }
+        
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            width: 500px;
+            margin: auto;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.507);
+        }
+
+        footer {
+            color: white;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Vamos contar</h1>
+    </header>
+    <section>
+        <div>
+            <p>Início: <input type="number" id="txtnumi"></p>
+            <p>Fim: <input type="number" id="txtnumf"></p>
+            <p>Passo: <input type="number" id="txtpasso"></p>
+            <p> <input type="button" value="Contar" onclick="contar()"></p>
+        </div>
+        <div id="res">
+            
+        </div>
+    </section>
+    <footer>
+        <p>&copy; Sirso</p>
+    </footer>
+    <script>
+        function contar() {
+            var início = parseInt(document.getElementById('txtnumi').value)
+            var fim = parseInt(document.getElementById('txtnumf').value)
+            var passo = parseInt(document.getElementById('txtpasso').value)
+            var resultado = document.getElementById('res')
+
+            resultado.innerHTML = 'Contando: <br>'
+            resultado.style.color = 'black'
+            
+            if (!isNaN(início) && !isNaN(fim) && !isNaN(passo)) {
+                if (passo > 0) {
+                    //Contagem crescente
+                    if (início < fim) {
+                        for (var count = início; count <= fim; count += passo) {
+                            resultado.innerHTML += `${count} `
+                        }
+                    // Contagem decrescente
+                    } else if (início > fim) {
+                        for (var count = início; count >= fim; count -= passo) {
+                            resultado.innerHTML += `${count} `
+                        }
+                    }
+                    resultado.style.color = 'black'
+                } else {
+                    resultado.innerHTML = 'O passo deve ser maior que zero!'
+                    resultado.style.color = 'red'
+                }
+            } else {
+                resultado.innerHTML = 'Erro! Insira números válidos'
+                resultado.style.color = 'red'
+            }
+        }
+
+    </script>
+
+</body>
+</html>

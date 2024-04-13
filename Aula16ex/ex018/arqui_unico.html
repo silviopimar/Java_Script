@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 17</title>
+    <style>
+        body {
+            background: rgb(70, 130, 241);
+            font: normal 15pt Arial;
+        }
+        
+        header {
+            color: white;
+            text-align: center;
+        }
+        
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            width: 500px;
+            margin: auto;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.507);
+        }
+        
+        footer {
+            color: white;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tabuada</h1>
+    </header>
+    <section>
+        <div>
+            <p>Número: <input type="number" id="txtn"> <input type="button" value="Contar tabuada" onclick="tabuada()"></p>
+        </div>
+        <div id="res">
+            
+        </div>
+    </section>
+    <footer>
+        <p>&copy; Sirso</p>
+    </footer>
+    <script>
+        function tabuada() {
+            var num = parseInt(document.getElementById('txtn').value)
+            var res = document.getElementById('res')
+        
+            if (!isNaN(num)) {
+                res.innerHTML = '' // Limpar o conteúdo atual
+                for (var count = 1; count <= 10; count += 1) {
+                        res.innerHTML += `${num} x ${count} = ${num * count} <br>`
+                }
+                res.style.color = 'black'
+            } else {
+                res.innerHTML = 'Erro! Insira um número válido! <br>'
+                res.style.color = 'red'
+            }
+        }
+    </script>
+</body>
+</html>

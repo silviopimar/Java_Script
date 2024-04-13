@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu primeiro program em JS</title>
+    <style> /* No CSS o comentário só funciona desse jeito (diferente do html e do JS, ver abaixo)*/
+        body {
+            background-color: rgb(231, 227, 206);
+            color: rgb(39, 41, 40);
+            font: normal 15pt Arial;
+        }
+        h1 {
+            color: brown;
+        }
+    </style>
+</head>
+<body><!--Lembrar que a forma de colocar comentário do html é dessea forma. No Java Script e no CSS são diferentes (ver notas acima/abaixo)-->
+    <h1>Olá, mundo</h1>
+    <p>Já me livrei da maldição</p>
+    <script>
+        var num1 = Number.parseInt(window.prompt('Digite um número: ')) // o comando window.prompt gera uma saída string (apesar de o dado de entrada ser um número). o comando tem que ser convertido para number:
+        //Number.parseInt(n) para números inteiros
+        //Number.parseFloat(n) para números decimais
+        //Number(n) comando mais recente para tratar números, sejam inteiros ou decimais. Mas os comando anteriores são úteis, caso só números inteiros ou só números decimais serão requeridos. 
+        // Para converter números em string pode-se utilizar dois comandos: String(n) ou n.toString(), veja exemplo abaixo
+        var num2 = Number.parseInt(window.prompt('Digite outro número: '))
+        var soma = num1 + num2
+        // window.alert('A soma dos valores é ' + soma) //window.alert('A soma dos valores é ' + String(soma))
+        window.alert(`A soma entre ${num1} e ${num2} é igual a ${soma}`) //usando place holder (template string, entre crase)
+    </script>
+</body>
+</html>

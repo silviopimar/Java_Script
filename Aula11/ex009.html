@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nacionalidade</title>
+</head>
+<body>
+    <h1>Nacionalidade</h1>
+    Nacionalidade <input type="text" id="txtnac">
+    <input type="button" value="verificar" onclick="verify()">
+    <div id="resultado">
+        
+    </div>
+    <script>
+        function verify() {
+            var txtn = window.document.querySelector('#txtnac')
+            var resultado = window.document.querySelector('div#resultado')
+            var país = txtn.value
+            resultado.innerHTML = `<p>Você digitou ${país}</p>`
+            if (país != 'Brasil') {
+                resultado.innerHTML += `<p>Você é <strong>Estrangeiro</strong></p>`               
+            } else {
+                resultado.innerHTML += '<p>Você é <strong>Brasileiro</strong></p>'
+            }
+            
+            
+        }
+
+    </script>
+    
+</body>
+</html>
